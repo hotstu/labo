@@ -115,7 +115,7 @@
 	function _doSendRequest(handlerName, params, responseCallback) {
 		var callbackId = 'cb_' + (uniqueId++) + '_' + new Date().getTime();
 		responseCallbacks[callbackId] = responseCallback;
-		console.log("_doSendRequest-->" + JSON.stringify(responseCallbacks));
+		//console.log("_doSendRequest-->" + JSON.stringify(responseCallbacks));
 		var request = {};
 		request[_JSNativeBridge.request.interfaceName] = handlerName;
 		request[_JSNativeBridge.request.valuesName] = params;
@@ -138,7 +138,7 @@
 	    }
 
         if(_JSNativeBridge.debug){
-            console.log("--- JS PROMPT BEGIN ---");
+           // console.log("--- JS PROMPT BEGIN ---");
         }
 
 	    // nim://dispatch:1?{json params}, prompt 是阻塞的,要等待java层confirm调用后才会返回
@@ -148,11 +148,12 @@
 		        + base64encode(UTF8.encode(JSON.stringify(message))));
 
 		if(_JSNativeBridge.debug){
-		    console.log("--- JS PROMPT END ---" + result);
+		    //console.log("--- JS PROMPT END ---" + result);
 		}
 
         if(sync) {
-            return JSON.parse(result);
+			//fix 处理空字符串的转换异常
+            return result && JSON.parse(result);
         }
 	}
 
@@ -219,7 +220,7 @@
 		response[_JSNativeBridge.response.responseName] = responseData;
 
 		if(_JSNativeBridge.debug){
-            console.log("--- JS RESPONSE TO JAVA ---");
+            //console.log("--- JS RESPONSE TO JAVA ---");
         }
 
 		_doSend(response, false);

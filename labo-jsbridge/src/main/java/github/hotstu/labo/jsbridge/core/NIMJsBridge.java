@@ -109,6 +109,7 @@ public class NIMJsBridge {
         webView.getSettings().setJavaScriptEnabled(true);
         webChromeClient = new NIMWebChromeClient(builder.getWebChromeClient(), this);
         webView.setWebChromeClient(webChromeClient);
+        webView.setWebViewClient(new WebViewClientDelegate(builder.getWebViewClient()));
         saveJavaMethodsForJS(builder.getJavaInterfacesForJS());
 
         // share NIMJsBridge instance

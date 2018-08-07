@@ -20,6 +20,7 @@ import android.net.Uri;
 import android.text.TextUtils;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
 import java.util.ArrayList;
 
@@ -29,7 +30,7 @@ import java.util.ArrayList;
  * Created by huangjun on 2016/10/18.
  */
 
-public class NIMJsBridgeBuilder {
+public class NIMJsBridgeBuilder<T extends NIMJsBridgeBuilder> {
 
     private static final String PROTOCOL_SCHEMA = "nim";
     private static final String PROTOCOL_HOST = "dispatch";
@@ -37,6 +38,7 @@ public class NIMJsBridgeBuilder {
 
     private String protocol;
     private WebChromeClient webChromeClient;
+    private WebViewClient webViewClient;
     private ArrayList javaInterfacesForJS;
     private WebView webView;
 
@@ -51,25 +53,34 @@ public class NIMJsBridgeBuilder {
         return new NIMJsBridge(this);
     }
 
-    public NIMJsBridgeBuilder setWebChromeClient(WebChromeClient webChromeClient) {
+    public T setWebChromeClient(WebChromeClient webChromeClient) {
         this.webChromeClient = webChromeClient;
-        return this;
+        return (T) this;
     }
 
-    public NIMJsBridgeBuilder addJavaInterfaceForJS(Object javaInterface) {
+    public T setWebViewClient(WebViewClient webViewClient) {
+        this.webViewClient = webViewClient;
+        return (T) this;
+    }
+
+    public WebViewClient getWebViewClient() {
+        return webViewClient;
+    }
+
+    public T addJavaInterfaceForJS(Object javaInterface) {
         if (javaInterface == null) {
-            return this;
+            return (T) this;
         }
         if (javaInterfacesForJS == null) {
             javaInterfacesForJS = new ArrayList();
         }
         javaInterfacesForJS.add(javaInterface);
-        return this;
+        return (T) this;
     }
 
-    public NIMJsBridgeBuilder setWebView(WebView webView) {
+    public T setWebView(WebView webView) {
         this.webView = webView;
-        return this;
+        return (T) this;
     }
 
     public WebChromeClient getWebChromeClient() {

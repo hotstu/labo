@@ -21,6 +21,7 @@ import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Message;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.webkit.ConsoleMessage;
 import android.webkit.GeolocationPermissions;
@@ -39,7 +40,7 @@ import android.webkit.WebView;
 public class WebChromeClientDelegate extends WebChromeClient {
     private final WebChromeClient delegate;
 
-    public WebChromeClientDelegate(WebChromeClient delegate) {
+    public WebChromeClientDelegate(@Nullable WebChromeClient delegate) {
         this.delegate = delegate;
     }
     /**
@@ -539,6 +540,9 @@ public class WebChromeClientDelegate extends WebChromeClient {
     }
 
     /**
+     * 这个接口在5.1之前不可用，
+     * 当我们在Web页面上点击选择文件的控件(<input type="file">)时，会产生不同的回调方法，
+     * 最坑的点是在Android4.4系统上没有回调
      * Tell the client to show a file chooser.
      * <p>
      * This is called to handle HTML forms with 'file' input type, in response to the
