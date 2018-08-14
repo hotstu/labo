@@ -164,6 +164,7 @@
 			responseCallback = responseCallbacks[responseIdValue];
 			if (!responseCallback) {
 				alert('responseCallback doesn\'t exist!');
+				console.error("_doNativeResponse-->" + JSON.stringify(response));
 				return;
 			}
 			responseCallback(response[_JSNativeBridge.response.responseName]);

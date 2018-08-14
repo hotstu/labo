@@ -303,7 +303,7 @@ public class NIMJsBridge {
         String syncJsonResult = null;
         if (!TextUtils.isEmpty(url)) {
             if (DEBUG_MODE) {
-                LogUtil.i("JS -> JAVA URL：" + url);
+                //LogUtil.i("JS -> JAVA URL：" + url);
             }
 
             if (url.startsWith(protocol)) {
@@ -365,7 +365,7 @@ public class NIMJsBridge {
             }
         } else {
             // js->java：说明是js请求java的请求数据,找到执行的java方法,反射调用
-            LogUtil.d("js invoke java method");
+            //LogUtil.d("js invoke java method");
             Request request = (Request) interact;
 
             MethodHandler methodHandler = javaInterfaces.get(request.getInterfaceName());

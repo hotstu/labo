@@ -18,6 +18,8 @@ package github.hotstu.labo.jsbridge;
 
 import org.junit.Test;
 
+import github.hotstu.labo.jsbridge.util.JsUtil;
+
 import static org.junit.Assert.*;
 
 /**
@@ -29,5 +31,12 @@ public class ExampleUnitTest {
     @Test
     public void addition_isCorrect() throws Exception {
         assertEquals(4, 2 + 2);
+    }
+
+    @Test
+    public void testEspcape() {
+        String tester = "javascript:_JSNativeBridge._handleMessageFromNative('{\"responseId\":\"cb_10_1532848686065\",\"data\":{\"values\":{\"ret\":\"[\\\"\\/sdcard\\/data\\/.push_deviceid\\\"]\",\"err\":\"null\"}}}')";
+        String escape = JsUtil.escape(tester);
+        System.out.println(escape);
     }
 }

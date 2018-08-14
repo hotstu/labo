@@ -23,6 +23,7 @@ import android.util.Log;
  */
 
 public class LogUtil {
+    public static boolean debug = false;
 
     private static final String TAG = "NIMJSBridge";
 
@@ -31,22 +32,27 @@ public class LogUtil {
     private static final String LOG_SUFFIX = " ===";
 
     public static void i(String msg) {
+        if(debug)
         i(TAG, wrap(msg));
     }
 
     public static void i(String tag, String msg) {
+        if(debug)
         Log.i(tag, msg);
     }
 
     public static void d(String msg) {
+        if(debug)
         d(TAG, wrap(msg));
     }
 
     public static void d(String tag, String msg) {
+        if(debug)
         Log.d(tag, msg);
     }
 
     public static void e(String msg) {
+        if(debug)
         Log.e(TAG, msg);
     }
 

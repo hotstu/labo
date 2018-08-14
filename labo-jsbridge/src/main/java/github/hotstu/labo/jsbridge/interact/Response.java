@@ -21,6 +21,8 @@ import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import github.hotstu.labo.jsbridge.util.JsUtil;
+
 /**
  * java->js->javaCallback(response)
  * js->java->replyToJs(response)
@@ -136,6 +138,6 @@ public class Response extends Interact {
             e.printStackTrace();
         }
 
-        return "'" + jsonObject.toString() + "'";
+        return "'" + JsUtil.escape(jsonObject.toString()) + "'";
     }
 }

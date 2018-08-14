@@ -74,7 +74,9 @@ public class NIMJsBridgeBuilder<T extends NIMJsBridgeBuilder> {
         if (javaInterfacesForJS == null) {
             javaInterfacesForJS = new ArrayList();
         }
-        javaInterfacesForJS.add(javaInterface);
+        if (!javaInterfacesForJS.contains(javaInterface)) {
+            javaInterfacesForJS.add(javaInterface);
+        }
         return (T) this;
     }
 
@@ -88,6 +90,9 @@ public class NIMJsBridgeBuilder<T extends NIMJsBridgeBuilder> {
     }
 
     public ArrayList getJavaInterfacesForJS() {
+        if (javaInterfacesForJS == null) {
+            javaInterfacesForJS = new ArrayList();
+        }
         return javaInterfacesForJS;
     }
 

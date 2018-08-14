@@ -43,4 +43,47 @@ public class JsUtil {
 
         return false;
     }
+
+    public static String escape(String paramString) {
+        if (paramString == null || "".equals(paramString)) {
+            return paramString;
+        }
+        StringBuilder localStringBuilder = new StringBuilder();
+        int i = paramString.length();
+        for (int j = 0; j < i; j++) {
+            char c1 = paramString.charAt(j);
+            switch (c1) {
+                case '"':
+                case '\'':
+                case '/':
+                case '\\':
+                    localStringBuilder.append('\\').append(c1);
+                    break;
+                case '\t':
+                    localStringBuilder.append("\\t");
+                    break;
+                case '\b':
+                    localStringBuilder.append("\\b");
+                    break;
+                case '\n':
+                    localStringBuilder.append("\\n");
+                    break;
+                case '\r':
+                    localStringBuilder.append("\\r");
+                    break;
+                case '\f':
+                    localStringBuilder.append("\\f");
+                    break;
+                default:
+                    //不可打印的控制字符，http://defindit.com/ascii.html
+                    if (c1 <= '\037') {
+                        localStringBuilder.append(String.format("\\u%04x", new Object[]{Integer.valueOf(c1)}));
+                    } else {
+                        localStringBuilder.append(c1);
+                    }
+                    break;
+            }
+        }
+        return localStringBuilder.toString();
+    }
 }
