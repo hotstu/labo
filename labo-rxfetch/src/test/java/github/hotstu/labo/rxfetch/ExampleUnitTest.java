@@ -1,5 +1,7 @@
 package github.hotstu.labo.rxfetch;
 
+import android.webkit.MimeTypeMap;
+
 import com.google.gson.reflect.TypeToken;
 
 import junit.framework.Assert;
@@ -225,6 +227,16 @@ public class ExampleUnitTest {
                 });
 
     }
+
+    @Test
+    public void testExt() {
+        String url = "/xxx/1.jpg";
+        String ext = MimeTypeMap.getFileExtensionFromUrl(url);
+        String mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(null);
+        System.out.println(MediaType.parse(mimeType));
+
+    }
+
 
     @Test
     public void testDownload() {

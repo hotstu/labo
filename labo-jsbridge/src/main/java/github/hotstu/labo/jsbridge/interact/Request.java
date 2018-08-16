@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import github.hotstu.labo.jsbridge.interfaces.IJavaCallback;
+import github.hotstu.labo.jsbridge.util.JsUtil;
 
 /**
  * java->js及js->java 请求数据格式：
@@ -120,6 +121,6 @@ public class Request extends Interact {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return "'" + jsonObject.toString() + "'";
+        return "'" + JsUtil.escape(jsonObject.toString()) + "'";
     }
 }

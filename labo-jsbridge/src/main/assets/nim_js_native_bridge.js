@@ -209,7 +209,7 @@
 			handler(request[_JSNativeBridge.request.valuesName], responseCallback);
 		} catch (exception) {
 			if (typeof console != 'undefined') {
-				console.error("_JSNativeBridge: WARNING: javascript handler throw.", exception);
+				console.error("_JSNativeBridge: WARNING: javascript handler throw."+ exception);
 			}
 		}
 	}

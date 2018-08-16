@@ -155,6 +155,7 @@ public class RxFetch {
 
     public  Flowable<ProgressMsg> requestWithProgress(final Request request, final Type clazz) {
         return Flowable.<ProgressMsg>create(emitter -> {
+            final CancelableCall cancelableCall = new CancelableCall();
             Call call;
             if (request.body() != null) {
                 ProgressRequestBody reqbody = new ProgressRequestBody(request.body());
@@ -162,6 +163,9 @@ public class RxFetch {
                     ProgressMsg reqEvent = new ProgressMsg(ProgressMsg.SEN_PROGRESS);
                     reqEvent.progress = totalBytesRead;
                     reqEvent.total = contentLenth;
+                    if (emitter.isCancelled()) {
+                        cancelableCall.cancel();
+                    }
                     emitter.onNext(reqEvent);
                 });
                 request.newBuilder().method(request.method(), reqbody);
@@ -169,6 +173,7 @@ public class RxFetch {
             } else {
                 call = client.newCall(request);
             }
+            cancelableCall.setCall(call);
             emitter.onNext(new ProgressMsg(ProgressMsg.START));
             Response execute = call.execute();
             ProgressResponseBody body = new ProgressResponseBody(execute.body());
@@ -177,7 +182,7 @@ public class RxFetch {
                 reqEvent.progress = totalBytesRead;
                 reqEvent.total = contentLenth;
                 if (emitter.isCancelled()) {
-                    call.cancel();
+                    cancelableCall.cancel();
                 }
                 emitter.onNext(reqEvent);
             });
@@ -235,6 +240,20 @@ public class RxFetch {
             super();
             this.code = code;
             this.result = result;
+        }
+    }
+
+    public static class CancelableCall{
+        Call mCall;
+
+        public void setCall(Call mCall) {
+            this.mCall = mCall;
+        }
+
+        public void cancel(){
+            if (mCall != null) {
+                mCall.cancel();
+            }
         }
     }
 
