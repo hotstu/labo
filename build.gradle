@@ -1,14 +1,15 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    
     repositories {
         google()
         jcenter()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.1'
         classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -16,14 +17,21 @@ buildscript {
     }
 }
 ext.userHome = System.getProperty("user.home")
-ext.SUPPORT_VERSION = "26.1.0"
 allprojects {
+    def bintray_user = "hglf"
+    def Repository = "maven"
+
     repositories {
         google()
         jcenter()
         maven{
             url uri("${userHome}/repo")//本地仓库 debug use
         }
+        maven {
+            url "https://dl.bintray.com/$bintray_user/$Repository"
+        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+
     }
 }
 
@@ -35,6 +43,8 @@ subprojects {
             force "com.android.support:design:$SUPPORT_VERSION"
             force "com.android.support:support-vector-drawable:$SUPPORT_VERSION"
             force "com.android.support:animated-vector-drawable:$SUPPORT_VERSION"
+            force "com.android.support:support-compat:$SUPPORT_VERSION"
+
         }
     }
     if ("labo-rxfetch" == it.name) {
@@ -46,6 +56,10 @@ subprojects {
         version = "0.0.1" // 发布到 bintray 的版本号
     }
     if ("labo-jsbridge" == it.name) {
+        group = 'gitbub.hotstu.labo'//发布到 bintray 的groupId号
+        version = "0.0.1" // 发布到 bintray 的版本号
+    }
+    if ("labo-listscreen" == it.name) {
         group = 'gitbub.hotstu.labo'//发布到 bintray 的groupId号
         version = "0.0.1" // 发布到 bintray 的版本号
     }

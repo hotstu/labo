@@ -1,1 +1,1 @@
-include ':app', ':labo-rxfetch', ':labo-tool', ':labo-jsbridge'
+include ':app', ':labo-rxfetch', ':labo-tool', ':labo-jsbridge', ':labo-listscreen', ':labo_recycler'

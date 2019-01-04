@@ -21,7 +21,7 @@ import io.reactivex.ObservableTransformer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
-public class LaboSchedulers {
+public class Transformers {
     public static final FlowableTransformer<?, ?> mTransformer =
             upstream -> upstream.subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread());
