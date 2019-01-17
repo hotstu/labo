@@ -16,14 +16,14 @@
 
 package github.hotstu.labo.listscreen;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 import android.view.View;
 import android.view.ViewGroup;
 
 /**
  * 适用于{@link BaseListScreen }的ViewPagerAdapter
  */
-public abstract class PagerAdapter<T extends BaseListScreen> extends android.support.v4.view.PagerAdapter {
+public abstract class PagerAdapter<T extends BaseListScreen> extends androidx.viewpager.widget.PagerAdapter {
     BaseListScreen currentPrimaryItem = null;
 
     abstract public T getItem(@NonNull ViewGroup container,int position);

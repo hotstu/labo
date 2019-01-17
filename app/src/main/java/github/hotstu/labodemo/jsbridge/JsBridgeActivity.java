@@ -17,10 +17,10 @@
 package github.hotstu.labodemo.jsbridge;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 
+import androidx.appcompat.app.AppCompatActivity;
 import github.hotstu.labo.jsbridge.core.NIMJsBridge;
 import github.hotstu.labo.jsbridge.core.NIMJsBridgeBuilder;
 import github.hotstu.labo.jsbridge.util.WebViewConfig;

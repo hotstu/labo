@@ -18,9 +18,9 @@ package github.hotstu.labo.listscreen;
 
 import android.content.Context;
 import android.os.Parcelable;
-import android.support.annotation.IntDef;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.IntDef;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;

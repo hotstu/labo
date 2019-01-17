@@ -17,7 +17,7 @@
 package github.hotstu.labodemo.listscreen;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 
 public class ListScreenActivity extends AppCompatActivity {
 

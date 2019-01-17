@@ -18,9 +18,6 @@ package github.hotstu.labodemo.listscreen;
 
 import android.content.Context;
 import android.graphics.Color;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -33,6 +30,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import github.hotstu.labo.listscreen.BaseListScreen;
 import github.hotstu.labo.rxfetch.Pagination;
 import github.hotstu.naiue.widget.recycler.MOCommonViewHolder;
