@@ -1,4 +1,6 @@
 apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 28
@@ -35,8 +37,13 @@ dependencies {
     testImplementation 'org.robolectric:robolectric:3.7.1'
     testImplementation 'com.squareup.okhttp3:mockwebserver:3.10.0'
     testImplementation group: 'org.jsoup', name: 'jsoup', version: '1.11.2'
+    implementation "androidx.core:core-ktx:1.0.2"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
 //apply from: "../deployMaven.gradle"
 apply from: "../deployBintray.gradle"
 apply from: "../deployLocalMaven.gradle"
+repositories {
+    mavenCentral()
+}
