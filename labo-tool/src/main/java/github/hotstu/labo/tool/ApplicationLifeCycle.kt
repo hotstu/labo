@@ -14,53 +14,53 @@
  * limitations under the License.
  */
 
-package github.hotstu.labo.tool;
+package github.hotstu.labo.tool
 
 /**
  * Created by zhangshaowen on 16/3/8.
  */
 
 
-import android.app.Application;
-import android.content.Context;
-import android.content.res.Configuration;
+import android.app.Application
+import android.content.Context
+import android.content.res.Configuration
 
 /**
  * This interface is used to delegate calls from main Application object.
  *
  * Implementations of this interface must have a one-argument constructor that takes
- * an argument of type {@link Application}.
+ * an argument of type [Application].
  */
-public interface ApplicationLifeCycle {
+interface ApplicationLifeCycle {
 
     /**
-     * Same as {@link Application#onCreate()}.
+     * Same as [Application.onCreate].
      */
-    void onCreate();
+    fun onCreate()
 
     /**
-     * Same as {@link Application#onLowMemory()}.
+     * Same as [Application.onLowMemory].
      */
-    void onLowMemory();
+    fun onLowMemory()
 
     /**
-     * Same as {@link Application#onTrimMemory(int level)}.
+     * Same as [Application.onTrimMemory].
      * @param level
      */
-    void onTrimMemory(int level);
+    fun onTrimMemory(level: Int)
 
     /**
-     * Same as {@link Application#onTerminate()}.
+     * Same as [Application.onTerminate].
      */
-    void onTerminate();
+    fun onTerminate()
 
     /**
-     * Same as {@link Application#onConfigurationChanged(Configuration newconfig)}.
+     * Same as [Application.onConfigurationChanged].
      */
-    void onConfigurationChanged(Configuration newConfig);
+    fun onConfigurationChanged(newConfig: Configuration)
 
     /**
-     * Same as {@link Application#attachBaseContext(Context context)}.
+     * Same as [Application.attachBaseContext].
      */
-    void onBaseContextAttached(Context base);
+    fun onBaseContextAttached(base: Context)
 }
