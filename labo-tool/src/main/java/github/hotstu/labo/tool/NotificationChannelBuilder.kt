@@ -26,10 +26,9 @@ val NotificationChannelGroup.penddingChannels: ArrayList<NotificationChannel>
         extendPenddingChannels[this]!!
     }
 
-fun config(init: Config.() -> Unit): Config {
+inline fun config(init: Config.() -> Unit) {
     val config = Config()
     config.apply(init)
-    return config
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -43,25 +42,23 @@ fun Config.clean() {
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun Config.group(
+inline fun Config.group(
         groupId: String = "default",
         groupName: String = "default",
-        init: NotificationChannelGroup.() -> Unit): NotificationChannelGroup {
+        init: NotificationChannelGroup.() -> Unit) {
     val group = NotificationChannelGroup(groupId, groupName)
     chidren.add(group)
     group.apply(init)
-    return group
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
-fun NotificationChannelGroup.channel(
+inline fun NotificationChannelGroup.channel(
         id: String = "default",
         name: String = "default",
         importance: Int = NotificationManager.IMPORTANCE_DEFAULT,
-        init: NotificationChannel.() -> Unit): NotificationChannel {
+        init: NotificationChannel.() -> Unit){
     val channel = NotificationChannel(id, name, importance)
     channel.group = this.id
     this.penddingChannels.add(channel)
     channel.apply(init)
-    return channel
 }
