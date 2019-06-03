@@ -1,12 +1,16 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 28
     compileOptions {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
+    }
+    dataBinding {
+        enabled=true
     }
     defaultConfig {
         applicationId "github.hotstu.labo"
@@ -38,6 +42,9 @@ dependencies {
     implementation project(':labo-tool')
     implementation "androidx.core:core-ktx:1.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation project(path: ':labo_nott')
+    // notice that the compiler version must be the same than our gradle version
+    kapt 'com.android.databinding:compiler:3.2.1'
 }
 repositories {
     mavenCentral()

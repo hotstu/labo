@@ -1,10 +1,11 @@
-package github.hotstu.labo.tool
+package github.hotstu.labo.nott
 
 import android.app.NotificationChannel
 import android.app.NotificationChannelGroup
 import android.app.NotificationManager
 import android.os.Build
 import androidx.annotation.RequiresApi
+import java.util.*
 
 /**
  * @author hglf <a href="https://github.com/hotstu">hglf</a>
@@ -26,9 +27,10 @@ val NotificationChannelGroup.penddingChannels: ArrayList<NotificationChannel>
         extendPenddingChannels[this]!!
     }
 
-inline fun config(init: Config.() -> Unit) {
+inline fun config(init: Config.() -> Unit): Config {
     val config = Config()
     config.apply(init)
+    return config
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -45,10 +47,11 @@ fun Config.clean() {
 inline fun Config.group(
         groupId: String = "default",
         groupName: String = "default",
-        init: NotificationChannelGroup.() -> Unit) {
+        init: NotificationChannelGroup.() -> Unit): NotificationChannelGroup {
     val group = NotificationChannelGroup(groupId, groupName)
     chidren.add(group)
     group.apply(init)
+    return group
 }
 
 @RequiresApi(Build.VERSION_CODES.O)
@@ -56,9 +59,10 @@ inline fun NotificationChannelGroup.channel(
         id: String = "default",
         name: String = "default",
         importance: Int = NotificationManager.IMPORTANCE_DEFAULT,
-        init: NotificationChannel.() -> Unit){
+        init: NotificationChannel.() -> Unit): NotificationChannel {
     val channel = NotificationChannel(id, name, importance)
     channel.group = this.id
     this.penddingChannels.add(channel)
     channel.apply(init)
+    return channel
 }

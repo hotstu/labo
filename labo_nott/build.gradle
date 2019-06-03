@@ -8,6 +8,7 @@ android {
         sourceCompatibility "1.8"
         targetCompatibility "1.8"
     }
+
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 28
@@ -18,7 +19,7 @@ android {
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
@@ -26,11 +27,11 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation "androidx.core:core-ktx:1.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-//apply from: "../deployMaven.gradle"
 apply from: "../deployBintray.gradle"
 apply from: "../deployLocalMaven.gradle"

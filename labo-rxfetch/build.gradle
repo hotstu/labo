@@ -44,6 +44,4 @@ dependencies {
 //apply from: "../deployMaven.gradle"
 apply from: "../deployBintray.gradle"
 apply from: "../deployLocalMaven.gradle"
-repositories {
-    mavenCentral()
-}
+

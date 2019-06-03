@@ -4,7 +4,10 @@ import android.app.Application
 import android.app.NotificationManager
 import android.content.Context
 import android.os.Build
-import github.hotstu.labo.tool.*
+import github.hotstu.labo.nott.applyTo
+import github.hotstu.labo.nott.channel
+import github.hotstu.labo.nott.clean
+import github.hotstu.labo.nott.group
 
 /**
  * @author hglf <a href="https://github.com/hotstu">hglf</a>
@@ -16,7 +19,7 @@ class App : Application() {
         super.onCreate()
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-            val config = config {
+            val config = github.hotstu.labo.nott.config {
                 group(groupId = "chatGroup", groupName = "chat") {
                     channel(id = "Ch1") {
                         name = "channel1"
