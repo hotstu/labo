@@ -24,15 +24,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 import github.hotstu.labo.listscreen.BaseListScreen;
 import github.hotstu.labo.rxfetch.Pagination;
 import github.hotstu.naiue.widget.recycler.MOCommonViewHolder;
@@ -63,12 +64,7 @@ public class DemoListScreen extends BaseListScreen{
             final String item = ((String) data);
             MOCommonViewHolder yhHolder = ((MOCommonViewHolder) holder);
             yhHolder.setText(android.R.id.text1, item);
-            yhHolder.setClickListener(0, new OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("onClick", item);
-                }
-            });
+            yhHolder.setClickListener(0, v -> Log.d("onClick", item));
         }
 
         @Override
@@ -173,7 +169,7 @@ public class DemoListScreen extends BaseListScreen{
         ));
         Observable.just(data)
                 .delay(1000, TimeUnit.MILLISECONDS)
-                .map((Function<List<String>, List<String>>) strings -> {
+                .map(strings -> {
                     float v = random.nextFloat();
 //                    if (v < .3f) {
 //                        throw new Exception("test");
