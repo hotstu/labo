@@ -33,5 +33,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 }
 
-apply from: "../deployBintray.gradle"
-apply from: "../deployLocalMaven.gradle"
+//apply from: "../deployBintray.gradle"
+//apply from: "../deployLocalMaven.gradle"
