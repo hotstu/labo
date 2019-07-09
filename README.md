@@ -10,9 +10,20 @@
   JsBridge,实现了java到js、js到java的相互调取，对调用进行了工程化的封装，Webview的安全处理，
   支持同步调用、异步调用，支持跨window调用。
 
+```
+  @: optimization
+  +: new feature
+  #: bug fix
+  -: removed feature
+  *: Note
+```
+
 ## changelog
+* 1.2.0
+  * +labo_sec 
+  * +labo_noob
 * 1.1.0
-    1. fix groupid typo
+    1. #fix groupid typo
 * 1.0.0
 
     1. migrate to androidx

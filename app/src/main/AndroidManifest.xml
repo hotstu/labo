@@ -12,19 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".NotificationActivity">
+        <activity android:name=".noo.NooActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".jsbridge.JsBridgeActivity">
+        <activity android:name=".NotificationActivity">
 
         </activity>
+        <activity android:name=".jsbridge.JsBridgeActivity"></activity>
         <activity
             android:name=".listscreen.ListScreenActivity"
-            android:theme="@style/MoTheme"></activity>
+            android:theme="@style/MoTheme" />
     </application>
 
 </manifest>

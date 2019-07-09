@@ -10,7 +10,7 @@ android {
         targetCompatibility "1.8"
     }
     dataBinding {
-        enabled=true
+        enabled = true
     }
     defaultConfig {
         applicationId "github.hotstu.labo"
@@ -45,6 +45,7 @@ dependencies {
     implementation project(path: ':labo_nott')
     // notice that the compiler version must be the same than our gradle version
     kapt 'com.android.databinding:compiler:3.2.1'
+    implementation project(path: ':labo_noob')
 }
 repositories {
     mavenCentral()
