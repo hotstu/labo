@@ -11,7 +11,8 @@
   支持同步调用、异步调用，支持跨window调用。
 
 ## changelog
-
+* 1.1.0
+    1. fix groupid typo
 * 1.0.0
 
     1. migrate to androidx
