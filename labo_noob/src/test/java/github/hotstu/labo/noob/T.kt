@@ -1,6 +1,8 @@
 package github.hotstu.labo.noob
 
 import android.graphics.Rect
+import io.reactivex.Observable
+import org.junit.Test
 
 /**
  * @author hglf [hglf](https://github.com/hotstu)
@@ -11,18 +13,13 @@ class T {
     fun ltwh(left: Int, top: Int, w: Int, h: Int): Rect {
         return Rect(left, top, left + w, top + h)
     }
+    @Test
     fun main() {
-        val nooView = NooView(null)
-        nooView.events(listOf(
-                NooAction(ltwh(10,10, 200, 200), "desc1"),
-                NooAction(ltwh(110,110, 200, 200), "desc2")
-        )).subscribe({
-            nooView.archorToAction(it)
+        Observable.create<String> {
+            //it.onNext("1")
+            it.onComplete()
+        }.flatMap { t: String -> Observable.just("") }.subscribe({ println(it) }, {  }, { println("complete")})
 
-        }, {
 
-        }, {
-
-        })
     }
 }
