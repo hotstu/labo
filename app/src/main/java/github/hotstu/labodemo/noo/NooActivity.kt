@@ -6,8 +6,8 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.core.view.doOnLayout
-import github.hotstu.labo.noob.NooAction
 import github.hotstu.labo.noob.NooView
+import github.hotstu.labo.noob.TextNooAction
 import github.hotstu.labo.noob.events
 import github.hotstu.labodemo.R
 import io.reactivex.Observable
@@ -39,18 +39,18 @@ class NooActivity : AppCompatActivity() {
             ret.offset(-location[0], -location[1])
             ret
         }).flatMap {
-            val list = it.map { NooAction(it, "窗前明月光") }.toMutableList()
-            list.add(0, NooAction(Rect(), "start"))
-            list.add(NooAction(Rect(), "stop"))
+            val list = it.map { TextNooAction(it, "步步高点读机") }.toMutableList()
+            list.add(0, TextNooAction(Rect(), "start"))
+            list.add(TextNooAction(Rect(), "stop"))
             nooView.events(list)
         }.subscribe {
-            if (it.desc == "start") {
-                nooView.anchorToAction(it)
-            } else if (it.desc == "stop") {
-                nooView.detachFromWindow(this)
-            } else {
-                nooView.anchorToAction(it)
+            it as TextNooAction
+            when (it.desc) {
+                "start" -> nooView.anchorToAction(it)
+                "stop" -> nooView.detachFromWindow(this)
+                else -> nooView.anchorToAction(it)
             }
+
         }
     }
 }

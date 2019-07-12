@@ -3,11 +3,10 @@ package github.hotstu.labo.noob
 import android.app.Activity
 import android.content.Context
 import android.graphics.*
-import android.view.Gravity
-import android.view.View
-import android.view.ViewGroup
-import android.view.Window
+import android.view.*
 import android.widget.FrameLayout
+import android.widget.TextView
+import androidx.annotation.MainThread
 import androidx.core.graphics.toRectF
 import io.reactivex.Observable
 import java.util.*
@@ -38,8 +37,24 @@ fun NooView.events(array: List<NooAction>): Observable<NooAction> = Observable.c
 
 }
 
+interface NooAction {
+    fun getView(ctx: Context): View
+    fun getAchorRect(): Rect
+}
 
-data class NooAction(val rect: Rect, val desc: String)
+class TextNooAction(val rect: Rect, val desc: String) : NooAction {
+    override fun getView(ctx: Context): View = LayoutInflater.from(ctx).inflate(R.layout.noo_layout_textview, null)
+            .apply {
+                this as TextView
+                text = desc
+                layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT,
+                        ViewGroup.LayoutParams.WRAP_CONTENT, Gravity.CENTER)
+            }
+
+    override fun getAchorRect(): Rect = rect
+}
+
+//data class NooAction(val rect: Rect, val desc: String)
 
 class NooView(context: Context) : FrameLayout(context) {
     private var action: NooAction? = null
@@ -53,7 +68,7 @@ class NooView(context: Context) : FrameLayout(context) {
         xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR)
     }
     private val color = Color.parseColor("#7f333333")
-
+    private var currentLabelView: View? = null
 
     init {
         setWillNotDraw(false)
@@ -70,8 +85,9 @@ class NooView(context: Context) : FrameLayout(context) {
         //TODO 只负责layout指定的child， 其他委托给super处理
         dreamRect.set(0, 0, right - left, bottom - top)
         if (action != null) {
-            val rect = action!!.rect
+            val rect = action!!.getAchorRect()
             //rect.offset(left, top)
+            //TODO if is excatly center vertical , compare the horizontal value if needed
             if (rect.centerY() > dreamRect.centerY()) {
                 dreamRect.bottom = rect.top
             } else {
@@ -144,12 +160,18 @@ class NooView(context: Context) : FrameLayout(context) {
         canvas.drawColor(color)
         //canvas.drawRect(dreamRect.toRectF(), mHelperPaint)
         action?.also {
-            canvas.drawOval(it.rect.toRectF(), mPaint)
+            canvas.drawRect(it.getAchorRect().toRectF(), mPaint)
         }
     }
 
+    @MainThread
     fun anchorToAction(action: NooAction) {
+        if (this.currentLabelView != null) {
+            removeView(currentLabelView)
+        }
         this.action = action
+        currentLabelView = this.action!!.getView(context)
+        addView(currentLabelView)
         requestLayout()
         postInvalidate()
     }
