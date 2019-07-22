@@ -6,9 +6,9 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.children
 import androidx.core.view.doOnLayout
-import github.hotstu.labo.noob.NooView
-import github.hotstu.labo.noob.TextNooAction
-import github.hotstu.labo.noob.events
+import github.hotstu.labo.noo.NooView
+import github.hotstu.labo.noo.TextNooAction
+import github.hotstu.labo.noo.events
 import github.hotstu.labodemo.R
 import io.reactivex.Observable
 

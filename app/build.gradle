@@ -38,16 +38,16 @@ dependencies {
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     implementation 'androidx.lifecycle:lifecycle-reactivestreams:2.0.0'
-    implementation project(':labo-listscreen')
-    implementation project(':labo-jsbridge')
-    implementation project(':labo-rxfetch')
-    implementation project(':labo-tool')
+    implementation project(':listscreen')
+    implementation project(':jsbridge')
+    implementation project(':rxfetch')
+    implementation project(':tool')
     implementation "androidx.core:core-ktx:1.0.2"
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation project(path: ':labo_nott')
+    implementation project(path: ':nott')
     // notice that the compiler version must be the same than our gradle version
     kapt 'com.android.databinding:compiler:3.2.1'
-    implementation project(path: ':labo_noob')
+    implementation project(path: ':noo')
 }
 repositories {
     mavenCentral()

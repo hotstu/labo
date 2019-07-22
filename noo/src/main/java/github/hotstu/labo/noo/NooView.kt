@@ -1,4 +1,4 @@
-package github.hotstu.labo.noob
+package github.hotstu.labo.noo
 
 import android.app.Activity
 import android.content.Context

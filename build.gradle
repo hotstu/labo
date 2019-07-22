@@ -47,19 +47,27 @@ subprojects {
 
         }
     }
-    if ("labo-rxfetch" == it.name) {
+    if ("rxfetch" == it.name) {
         group = 'github.hotstu.labo'//发布到 bintray 的groupId号
-        version = "1.1.0" // 发布到 bintray 的版本号
+        version = "1.0.0" // 发布到 bintray 的版本号
     }
-    if ("labo-tool" == it.name) {
+    if ("tool" == it.name) {
         group = 'github.hotstu.labo'//发布到 bintray 的groupId号
-        version = "1.1.0" // 发布到 bintray 的版本号
+        version = "1.0.0" // 发布到 bintray 的版本号
     }
-    if ("labo-jsbridge" == it.name) {
+    if ("jsbridge" == it.name) {
         group = 'github.hotstu.labo'//发布到 bintray 的groupId号
-        version = "1.1.0" // 发布到 bintray 的版本号
+        version = "1.0.0" // 发布到 bintray 的版本号
     }
-    if ("labo-nott" == it.name) {
+    if ("nott" == it.name) {
+        group = 'github.hotstu.labo'//发布到 bintray 的groupId号
+        version = "1.0.0" // 发布到 bintray 的版本号
+    }
+    if ("sec" == it.name) {
+        group = 'github.hotstu.labo'//发布到 bintray 的groupId号
+        version = "1.0.0" // 发布到 bintray 的版本号
+    }
+    if ("noo" == it.name) {
         group = 'github.hotstu.labo'//发布到 bintray 的groupId号
         version = "1.0.0" // 发布到 bintray 的版本号
     }
