@@ -1,4 +1,6 @@
-[![author](https://img.shields.io/badge/author-hglf-blue.svg)](https://github.com/hotstu) [ ![Download](https://api.bintray.com/packages/hglf/maven/labo/images/download.svg) ](https://bintray.com/hglf/maven/labo/_latestVersion) [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)![androidx](https://img.shields.io/badge/androidx-ok-green.svg)
+[![author](https://img.shields.io/badge/author-hglf-blue.svg)](https://github.com/hotstu)
+[![Download](https://api.bintray.com/packages/hglf/maven/labo_hglf/images/download.svg) ](https://bintray.com/hglf/maven/labo_hglf/_latestVersion)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 # labo-tool
   基础工具类
