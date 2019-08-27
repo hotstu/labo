@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package github.hotstu.labo.tool;
+package github.hotstu.labo.tool.util;
 
 import android.app.Instrumentation;
 import android.content.Context;

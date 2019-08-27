@@ -1,4 +1,4 @@
-package github.hotstu.labo.tool;
+package github.hotstu.labo.tool.util;
 
 import android.content.Context;
 import android.content.Intent;
