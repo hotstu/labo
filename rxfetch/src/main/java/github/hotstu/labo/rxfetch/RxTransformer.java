@@ -10,8 +10,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * 通常不推荐使用Rxjava提供的#Schedulers.io()
- * 如果没有正确中断线程，会造成线程阻塞
+ * 通常不推荐使用Rxjava提供的#Schedulers.io()进行长时间的io操作
+ * 因为通常observable被dispose之后http请求并不能立即中断，这个被占用的线程
+ * Schedulers.io重用，会造成线程阻塞
  * https://github.com/ReactiveX/RxJava/issues/4230
  *
  * @author hglf
