@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package github.hotstu.labo.rxfetch;
+package github.hotstu.labo.listscreen;
 
 import android.util.Log;
 

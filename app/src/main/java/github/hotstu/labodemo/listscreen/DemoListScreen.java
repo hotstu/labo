@@ -35,7 +35,7 @@ import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import github.hotstu.labo.listscreen.BaseListScreen;
-import github.hotstu.labo.rxfetch.Pagination;
+import github.hotstu.labo.listscreen.Pagination;
 import github.hotstu.naiue.widget.recycler.MOCommonViewHolder;
 import github.hotstu.naiue.widget.recycler.MOTypedRecyclerAdapter;
 import io.reactivex.Observable;
