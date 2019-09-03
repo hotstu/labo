@@ -11,6 +11,8 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationManagerCompat;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -24,15 +26,12 @@ import static android.content.Context.POWER_SERVICE;
  */
 public class PermissionUtil {
 
-    public static boolean isNotificationEnabled(Context ctx) {
+    public static boolean isNotificationEnabled(@NotNull Context ctx) {
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(ctx);
         return notificationManagerCompat.areNotificationsEnabled();
     }
 
-    public static boolean airPlaneModeOn(Context ctx) {
-        if (ctx == null) {
-            return false;
-        }
+    public static boolean airPlaneModeOn(@NotNull Context ctx) {
         try {
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
                 String strSystem = "android.provider.Settings$System";
@@ -73,7 +72,7 @@ public class PermissionUtil {
      * @param ctx
      * @return
      */
-    public static boolean checkLocationConfigEnabled(Context ctx) {
+    public static boolean checkLocationConfigEnabled(@NotNull Context ctx) {
         // 考虑到大部分App可能还未target到API 28，这里使用反射调用API 28开始提供的检查定位开关的方法
         if (Build.VERSION.SDK_INT >= 28) {
             boolean isLocationEnabled = true;
@@ -104,7 +103,7 @@ public class PermissionUtil {
     }
 
 
-    public static boolean isDozeDisabled(Context ctx) {
+    public static boolean isDozeDisabled(@NotNull Context ctx) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String packageName = ctx.getPackageName();
             PowerManager powerManager = (PowerManager) ctx.getSystemService(POWER_SERVICE);
@@ -120,7 +119,7 @@ public class PermissionUtil {
      *
      * @param ctx
      */
-    public static void requestDozeDisabled(Context ctx) {
+    public static void requestDozeDisabled(@NotNull Context ctx) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && !isDozeDisabled(ctx)) {
             String packageName = ctx.getPackageName();
             Intent intent = new Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS);
@@ -135,7 +134,7 @@ public class PermissionUtil {
      *
      * @param ctx
      */
-    public static void openLocationSetting(Context ctx) {
+    public static void openLocationSetting(@NotNull Context ctx) {
         Intent myIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         ctx.startActivity(myIntent);
     }
@@ -146,7 +145,7 @@ public class PermissionUtil {
      *
      * @param ctx
      */
-    public static void openAppSetting(Context ctx) {
+    public static void openAppSetting(@NotNull Context ctx) {
         Intent intent = new Intent();
         intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
         Uri uri = Uri.fromParts("package", ctx.getPackageName(), null);
