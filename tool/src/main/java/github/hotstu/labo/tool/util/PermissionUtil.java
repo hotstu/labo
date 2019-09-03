@@ -1,5 +1,6 @@
 package github.hotstu.labo.tool.util;
 
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
@@ -10,6 +11,7 @@ import android.provider.Settings;
 
 import androidx.core.app.NotificationManagerCompat;
 
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -25,6 +27,44 @@ public class PermissionUtil {
     public static boolean isNotificationEnabled(Context ctx) {
         NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(ctx);
         return notificationManagerCompat.areNotificationsEnabled();
+    }
+
+    public static boolean airPlaneModeOn(Context ctx) {
+        if (ctx == null) {
+            return false;
+        }
+        try {
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
+                String strSystem = "android.provider.Settings$System";
+                return isAirPlaneOn(ctx, strSystem);
+            } else {
+                String strGlobal = "android.provider.Settings$Global";
+                return isAirPlaneOn(ctx, strGlobal);
+            }
+        } catch (Throwable e) {
+        }
+        return false;
+    }
+
+    private static boolean isAirPlaneOn(Context ctx, String className)
+            throws Throwable {
+        ContentResolver cr = ctx.getContentResolver();
+        Object obj = null;
+        Class<?> cls = Class.forName(className);
+        Field field = cls.getField("AIRPLANE_MODE_ON");
+        field.setAccessible(true);
+        obj = field.get(cls);
+        String str = ((String) obj).toString();
+        Object[] oa = new Object[2];
+        oa[0] = cr;
+        oa[1] = str;
+        Class<?>[] ca = new Class[2];
+        ca[0] = ContentResolver.class;
+        ca[1] = String.class;
+        Method method = cls.getDeclaredMethod("getInt", ca);
+        method.setAccessible(true);
+        obj = method.invoke(null, oa);
+        return ((Integer) obj).intValue() == 1;
     }
 
     /**
