@@ -28,7 +28,7 @@ import androidx.fragment.app.FragmentManager
  * @author hglf
  * @since 2018/6/27
  */
-class ActivityLifeCircleDumper : Application.ActivityLifecycleCallbacks {
+open class ActivityLifeCircleDumper : Application.ActivityLifecycleCallbacks {
 
     private fun dumpItent(activity: Activity) {
         val i = activity.intent
@@ -66,7 +66,7 @@ class ActivityLifeCircleDumper : Application.ActivityLifecycleCallbacks {
 
     }
 
-    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle) {
+    override fun onActivityCreated(activity: Activity, savedInstanceState: Bundle?) {
         Log.d(TAG, "[onActivityCreated:" + activity.javaClass.name + "]")
         dumpItent(activity)
         if (activity is FragmentActivity) {
