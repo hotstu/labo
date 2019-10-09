@@ -232,17 +232,6 @@ public class RxFetch {
     }
 
 
-    public static class HTTPException extends IOException {
-        public int code;
-        public String result;
-
-        HTTPException(int code, String result) {
-            super();
-            this.code = code;
-            this.result = result;
-        }
-    }
-
     public static class CancelableCall{
         Call mCall;
 

@@ -1,9 +1,7 @@
 package github.hotstu.labo.tool.util;
 
-import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
-import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.PowerManager;
@@ -12,10 +10,6 @@ import android.provider.Settings;
 import androidx.core.app.NotificationManagerCompat;
 
 import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.List;
 
 import static android.content.Context.POWER_SERVICE;
 
@@ -31,76 +25,7 @@ public class PermissionUtil {
         return notificationManagerCompat.areNotificationsEnabled();
     }
 
-    public static boolean airPlaneModeOn(@NotNull Context ctx) {
-        try {
-            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR1) {
-                String strSystem = "android.provider.Settings$System";
-                return isAirPlaneOn(ctx, strSystem);
-            } else {
-                String strGlobal = "android.provider.Settings$Global";
-                return isAirPlaneOn(ctx, strGlobal);
-            }
-        } catch (Throwable e) {
-        }
-        return false;
-    }
 
-    private static boolean isAirPlaneOn(Context ctx, String className)
-            throws Throwable {
-        ContentResolver cr = ctx.getContentResolver();
-        Object obj = null;
-        Class<?> cls = Class.forName(className);
-        Field field = cls.getField("AIRPLANE_MODE_ON");
-        field.setAccessible(true);
-        obj = field.get(cls);
-        String str = ((String) obj).toString();
-        Object[] oa = new Object[2];
-        oa[0] = cr;
-        oa[1] = str;
-        Class<?>[] ca = new Class[2];
-        ca[0] = ContentResolver.class;
-        ca[1] = String.class;
-        Method method = cls.getDeclaredMethod("getInt", ca);
-        method.setAccessible(true);
-        obj = method.invoke(null, oa);
-        return ((Integer) obj).intValue() == 1;
-    }
-
-    /**
-     * 检查设备定位开关
-     *
-     * @param ctx
-     * @return
-     */
-    public static boolean checkLocationConfigEnabled(@NotNull Context ctx) {
-        // 考虑到大部分App可能还未target到API 28，这里使用反射调用API 28开始提供的检查定位开关的方法
-        if (Build.VERSION.SDK_INT >= 28) {
-            boolean isLocationEnabled = true;
-            LocationManager locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
-            try {
-                Method isLocationEnabledMethod = locationManager.getClass().getMethod("isLocationEnabled", new Class[]{});
-                isLocationEnabled = (boolean) isLocationEnabledMethod.invoke(locationManager);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return isLocationEnabled;
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            int locationMode = Settings.Secure.getInt(ctx.getContentResolver(),
-                    Settings.Secure.LOCATION_MODE, Settings.Secure.LOCATION_MODE_HIGH_ACCURACY);
-            boolean isLocationEnabled = locationMode != Settings.Secure.LOCATION_MODE_OFF;
-            return isLocationEnabled;
-        } else {
-            LocationManager locationManager = (LocationManager) ctx.getSystemService(Context.LOCATION_SERVICE);
-            List<String> allProviders = locationManager.getAllProviders();
-            if (allProviders == null || allProviders.isEmpty()) {
-                return false;
-            }
-            String usableProviders = Settings.Secure.getString(ctx.getContentResolver(),
-                    Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
-            boolean isLocationEnabled = !usableProviders.isEmpty();
-            return isLocationEnabled;
-        }
-    }
 
 
     public static boolean isDozeDisabled(@NotNull Context ctx) {

@@ -7,6 +7,11 @@
 
 # labo-rxfetch
    http请求核心库，对RxJava和OkHttp的封装，返回Observable，支持GET、POST，文件上传下载，支持断点续传、支持json自动反序列化到实例对象
+   
+   ```java
+           OkHttpClient build = new OkHttpClient.Builder().build();
+           fetch = new RxFetch(build, new GsonTypeAdapter(), new JsoupTypeAdapter());
+   ```
 
 # labo-jsBridge
   JsBridge,实现了java到js、js到java的相互调取，对调用进行了工程化的封装，Webview的安全处理，
