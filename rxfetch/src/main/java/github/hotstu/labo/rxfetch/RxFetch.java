@@ -255,7 +255,7 @@ public class RxFetch {
                     throw new IllegalArgumentException("key == null");
                 }
                 if (param.getValue() == null) {
-                    throw new IllegalArgumentException("value == null");
+                    throw new IllegalArgumentException(param.getKey() + " == null");
                 }
                 builder.addQueryParameter(param.getKey(), param.getValue());
             }
