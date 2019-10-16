@@ -275,7 +275,7 @@ public class RxFetch {
                     throw new IllegalArgumentException("key == null");
                 }
                 if (param.getValue() == null) {
-                    throw new IllegalArgumentException("value == null");
+                    throw new IllegalArgumentException(param.getKey() + " == null");
                 }
                 form.add(param.getKey(), param.getValue());
             }
