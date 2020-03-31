@@ -1,1 +1,1 @@
-include ':app', ':rxfetch', ':tool', ':jsbridge', ':listscreen', ':recycler', ':nott', ':sec', ':noo'
+include ':app', ':rxfetch', ':tool', ':jsbridge', ':listscreen', ':nott', ':sec', ':noo'
