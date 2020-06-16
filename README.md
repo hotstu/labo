@@ -26,6 +26,10 @@
 ```
 
 ## changelog
+rxfetch:
+* 1.0.2
+  * + Moshi json parser in the box
+
 * 1.2.0
   * +labo_sec 
   * +labo_noob
