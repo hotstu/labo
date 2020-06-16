@@ -41,6 +41,7 @@ import static junit.framework.Assert.fail;
 public class ExampleUnitTest {
 
     private RxFetch fetch;
+    private RxFetch fetch2;
     final Object lock = new Object();
     private MockWebServer server;
 
@@ -49,6 +50,7 @@ public class ExampleUnitTest {
         OkHttpClient build = new OkHttpClient.Builder()
                 .build();
         fetch = new RxFetch(build, new GsonTypeAdapter(), new JsoupTypeAdapter());
+        fetch2 = new RxFetch(build, new MoshiTypeAdapter());
         server = new MockWebServer();
 
 
@@ -104,6 +106,32 @@ public class ExampleUnitTest {
         System.out.println(baseUrl.toString());
         final boolean[] success = {false};
         fetch.<Bean>get(baseUrl.toString(),
+                params,
+                Bean.class)
+                .observeOn(Schedulers.io())
+                .subscribeOn(Schedulers.newThread())
+                .subscribe(s -> {
+                    System.out.println(s.msg);
+                    success[0] = true;
+                    synchronized (lock) {
+                        lock.notify();
+                    }
+                }, throwable -> fail());
+        synchronized (lock) {
+            lock.wait();
+        }
+        Assert.assertTrue(success[0]);
+    }
+
+    @Test
+    public void testMoshiParse() throws Exception {
+
+        server.enqueue(new MockResponse().setBody("{\"msg\":\"hello,world\",\"code\":0}"));
+        HashMap<String, String> params = new HashMap<>();
+        HttpUrl baseUrl = server.url("/v1/chat/");
+        System.out.println(baseUrl.toString());
+        final boolean[] success = {false};
+        fetch2.<Bean>get(baseUrl.toString(),
                 params,
                 Bean.class)
                 .observeOn(Schedulers.io())
